@@ -19,6 +19,7 @@ module TrafficSpy
 
     post '/sources' do
       URL.add_new(params)
+      Source.create(params, URL.find(params[:rootUrl]).id)
       #p params[:identifier]
       #p params[:rootUrl]
       200
