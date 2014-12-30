@@ -12,10 +12,18 @@ module TrafficSpy
     end
 
     def self.create(attributes, url)
-      table.insert(
-        :identifier => attributes[:identifier]
-        :url_id => url
+      begin
+        table.insert(
+          :identifier => attributes[:identifier],
+          :url_id => url
         )
+      rescue Sequel::UniqueConstraintViolation
+        return false
+      end
+    end
+
+    def self.find_identifier(identifier)
+      table.select(:identifier).where(identifier: identifier).first
     end
   end
 end

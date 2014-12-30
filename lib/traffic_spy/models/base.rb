@@ -15,3 +15,4 @@ end
 # @example
 
 require 'traffic_spy/models/urls'
+require 'traffic_spy/models/sources'

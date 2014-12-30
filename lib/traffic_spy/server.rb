@@ -12,17 +12,25 @@ module TrafficSpy
   #
   class Server < Sinatra::Base
     set :views, 'lib/views'
+    set :show_exceptions, false
 
     get '/' do
       erb :index
     end
 
     post '/sources' do
+      return 400 unless params[:rootUrl] && params[:identifier]
       URL.add_new(params)
-      Source.create(params, URL.find(params[:rootUrl]).id)
-      #p params[:identifier]
-      #p params[:rootUrl]
-      200
+      return 200 if Source.create(params, URL.find_url(params[:rootUrl]).id)
+      403
+    end
+
+    error 200 do
+      JSON.generate(Source.find_identifier(params[:identifier]))
+    end
+
+    error 403 do
+      "test"
     end
 
     not_found do
