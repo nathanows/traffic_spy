@@ -17,6 +17,13 @@ module TrafficSpy
       erb :index
     end
 
+    post '/sources' do
+      URL.add_new(params)
+      #p params[:identifier]
+      #p params[:rootUrl]
+      200
+    end
+
     not_found do
       erb :error
     end
