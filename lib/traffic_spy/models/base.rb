@@ -16,3 +16,8 @@ end
 
 require 'traffic_spy/models/urls'
 require 'traffic_spy/models/sources'
+require 'traffic_spy/models/payloads'
+require 'traffic_spy/models/events'
+require 'traffic_spy/models/referrals'
+require 'traffic_spy/models/user_agents'
+require 'traffic_spy/models/resolutions'

@@ -13,6 +13,7 @@ module TrafficSpy
 
     def self.add_new(attributes)
       create(attributes) if find_url(attributes[:rootUrl]).nil?
+      find_url(attributes[:rootUrl])
     end
 
     def self.create(attributes)
@@ -30,6 +31,5 @@ module TrafficSpy
       row = table.where(url: url).first
       URL.new(row) if row
     end
-
   end
 end

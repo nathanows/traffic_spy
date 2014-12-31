@@ -25,17 +25,23 @@ module TrafficSpy
       403
     end
 
+    post '/sources/:identifier/data' do |identifier|
+      payload = Hash[JSON.parse(params[:payload]).map{|(k,v)| [k.to_sym,v]}]
+      return 400 unless Payload.invalid?(payload)
+      return 200 if Payload.create(payload, identifier)
+      403
+    end
+
     error 200 do
-      JSON.generate(Source.find_identifier(params[:identifier]))
+      JSON.generate(Source.find_identifier(params[:identifier])) if params[:identifier]
     end
 
     error 403 do
-      "test"
+      "Forbidden"
     end
 
     not_found do
       erb :error
     end
   end
-
 end
