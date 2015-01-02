@@ -1,0 +1,75 @@
+<div class="jumbotron">
+  <div class="container">
+    <h1><%= identifier %></h1>
+    <p>Aggregate site analytic data for the <%= identifier %> campaign.</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <h2>Most Requested URL's</h2>
+      <p><strong>Most requested URL's to least requested URL's. Click links for url specific data.</strong></p>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>URL</th>
+            <th>Requests</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= partial :'partials/url_req', collection: url_reqs %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <h2>Web Browser Breakdown</h2>
+      <p><strong>Web browser breakdown across all requests.</strong></p>
+    </div>
+    <div class="col-md-4">
+      <h2>OS Breakdown</h2>
+      <p><strong>Operating system breakdown across all requests.</strong></p>
+    </div>
+  </div>
+  <br />
+  <hr />
+  <br />
+  <div class="row">
+    <div class="col-md-4">
+      <h2>Screen Resolution </h2>
+      <p><strong>Screen resolution breakdown across all requests (width x height).</strong></p>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Width</th>
+            <th>Height</th>
+            <th>Requests</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= partial :'partials/screen_res_req', collection: screen_res_reqs %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <h2>Average Response Time</h2>
+      <p><strong>Longest average response time per URL to shortest average response time.</strong></p>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>URL</th>
+            <th>Avg Resp Time(ms)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= partial :'partials/avg_response_time', collection: avg_response_times %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <h2>Aggregate Event Data</h2>
+      <p><strong>Aggregate Event Data</strong></p>
+      <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+    </div>
+  </div>
+</div>

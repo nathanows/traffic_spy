@@ -79,28 +79,41 @@ module TrafficSpy
       orig
     end
 
-    #attr_reader :id, :url
+    def self.url_reqs(identifier)
+      # .all returns an array of hashes
+      DB.fetch(
+        "SELECT u.url, count(p.url_id)
+        FROM payloads AS p
+        INNER JOIN urls AS u
+        ON p.url_id = u.id
+        WHERE p.source = '#{identifier}'
+        GROUP BY u.url
+        ORDER BY count(p.url_id) DESC;"
+      ).all
+    end
 
-    #def initialize(attributes)
-      #@id      = attributes[:id]
-      #@url     = attributes[:url]
-    #end
+    def self.screen_res_reqs(identifier)
+      DB.fetch(
+        "SELECT r.width, r.height, count(p.resolution_id)
+        FROM payloads p
+        INNER JOIN resolutions r
+        ON p.resolution_id = r.id
+        WHERE p.source = '#{identifier}'
+        GROUP BY r.width, r.height
+        ORDER BY count(p.resolution_id) DESC;"
+      ).all
+    end
 
-    #def self.table
-      #DB.from(:payloads)
-    #end
-
-    #def self.create(attributes)
-      #table.insert(
-        #:id   => next_id,
-        #:url  => attributes[:rootUrl]
-      #)
-    #end
-
-    #def self.find_url(url)
-      #row = table.where(url: url).first
-      #URL.new(row) if row
-    #end
-
+    def self.avg_response_times(identifier)
+      DB.fetch(
+        "SELECT u.url, avg(p.responded_in)
+        FROM payloads p
+        INNER JOIN urls u
+        ON p.url_id = u.id
+        WHERE p.source = '#{identifier}'
+        GROUP BY u.url
+        ORDER BY avg(p.responded_in) DESC;"
+      ).all
+    end
   end
 end

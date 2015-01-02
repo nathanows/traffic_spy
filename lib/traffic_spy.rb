@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'sequel'
 require 'json'
+require 'sinatra/partial'
 
 require 'traffic_spy/models/base'
 require 'traffic_spy/server'

@@ -13,6 +13,12 @@ module TrafficSpy
   class Server < Sinatra::Base
     set :views, 'lib/views'
     set :show_exceptions, false
+    set :root, 'lib'
+
+    configure do
+      register Sinatra::Partial
+      set :partial_template_engine, :erb
+    end
 
     get '/' do
       erb :index
@@ -31,6 +37,15 @@ module TrafficSpy
       return 200 if Payload.create(payload, identifier)
       403
     end
+
+    get '/sources/:identifier' do |identifier|
+      erb :app_details,
+          locals: { identifier: identifier,
+                    url_reqs: Payload.url_reqs(identifier),
+                    screen_res_reqs: Payload.screen_res_reqs(identifier),
+                    avg_response_times: Payload.avg_response_times(identifier)}
+    end
+
 
     error 200 do
       JSON.generate(Source.find_identifier(params[:identifier])) if params[:identifier]
