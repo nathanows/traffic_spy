@@ -9,7 +9,10 @@ group :development do
   gem 'guard-rspec'
   gem 'rb-fsevent', '~> 0.9'
   gem 'sinatra-partial'
-  # gem 'useragent'
+  gem 'capybara'
+  gem 'minitest'
+  gem 'nokogiri'
+  gem 'useragent'
 end
 
 group :evaluations do

@@ -14,10 +14,10 @@ end
 #
 # @example
 
-require 'traffic_spy/models/urls'
-require 'traffic_spy/models/sources'
-require 'traffic_spy/models/payloads'
-require 'traffic_spy/models/events'
-require 'traffic_spy/models/referrals'
-require 'traffic_spy/models/user_agents'
-require 'traffic_spy/models/resolutions'
+require_relative 'urls'
+require_relative 'sources'
+require_relative 'payloads'
+require_relative 'events'
+require_relative 'referrals'
+require_relative 'user_agents'
+require_relative 'resolutions'
