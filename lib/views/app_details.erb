@@ -34,10 +34,32 @@
     <div class="col-md-4">
       <h2>Web Browser Breakdown</h2>
       <p><strong>Web browser breakdown across all requests.</strong></p>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Browser Info</th>
+            <th>Requests</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= partial :'partials/browser_breakdown', collection: browser_breakdowns %>
+        </tbody>
+      </table>
     </div>
     <div class="col-md-4">
       <h2>OS Breakdown</h2>
       <p><strong>Operating system breakdown across all requests.</strong></p>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>OS Info</th>
+            <th>Requests</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= partial :'partials/os_breakdown', collection: os_breakdowns %>
+        </tbody>
+      </table>
     </div>
   </div>
   <br />
