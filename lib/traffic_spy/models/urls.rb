@@ -23,6 +23,13 @@ module TrafficSpy
       )
     end
 
+    def self.exists?(url)
+      !DB.fetch(
+        "SELECT * FROM urls
+        WHERE url = '#{url}'"
+      ).all.empty?
+    end
+
     def self.next_id
       table.count + 1
     end

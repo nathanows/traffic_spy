@@ -10,7 +10,6 @@ group :development do
   gem 'rb-fsevent', '~> 0.9'
   gem 'sinatra-partial'
   # gem 'useragent'
-  gem 'uri'
 end
 
 group :evaluations do

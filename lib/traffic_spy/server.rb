@@ -49,10 +49,23 @@ module TrafficSpy
     end
 
     get '/sources/:identifier/urls/*' do
-      erb :url_details,
-        locals: { path: params[:splat],
-                  identifier: params[:identifier],
-                  min_resp_time: QueryHelper.min_response_time(params[:identifier], params[:splat])}
+      root_url = URL.find_object(Source.find_object(params[:identifier]).url_id).url
+      url = root_url + "/" + params[:splat].join("/")
+      p url
+      p URL.exists?(url)
+      if URL.exists?(url)
+        erb :url_details,
+            locals: { path: params[:splat],
+                    identifier: params[:identifier],
+                    longest_resp_time: QueryHelper.longest_response_time(params[:identifier], url),
+                    shortest_resp_time: QueryHelper.shortest_response_time(params[:identifier], url),
+                    avg_resp_time: QueryHelper.average_response_time(params[:identifier], url),
+                    popular_referrers: QueryHelper.popular_referrers(params[:identifier], url),
+                    popular_user_agents: QueryHelper.popular_user_agents(params[:identifier], url),
+                    http_verbs: QueryHelper.which_http_verbs(params[:identifier], url)}
+      else
+        puts "uh oh"
+      end
     end
 
     error 200 do
