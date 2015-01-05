@@ -303,3 +303,15 @@ LOG:  received smart shutdown request
 LOG:  autovacuum launcher shutting down
 LOG:  shutting down
 LOG:  database system is shut down
+LOG:  database system was shut down at 2015-01-04 07:48:00 MST
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+LOG:  received fast shutdown request
+LOG:  aborting any active transactions
+FATAL:  terminating connection due to administrator command
+FATAL:  terminating connection due to administrator command
+LOG:  autovacuum launcher shutting down
+FATAL:  terminating connection due to administrator command
+FATAL:  terminating connection due to administrator command
+LOG:  shutting down
+LOG:  database system is shut down

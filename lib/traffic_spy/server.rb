@@ -44,8 +44,8 @@ module TrafficSpy
                     url_reqs: Payload.url_reqs(identifier),
                     screen_res_reqs: Payload.screen_res_reqs(identifier),
                     avg_response_times: Payload.avg_response_times(identifier),
-                    browser_breakdowns: UserAgent.parse_browser(identifier),
-                    os_breakdowns: UserAgent.parse_os(identifier)}
+                    browser_breakdowns: UserAgent.browser(identifier),
+                    os_breakdowns: UserAgent.os(identifier)}
     end
 
 

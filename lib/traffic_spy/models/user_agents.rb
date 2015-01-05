@@ -1,3 +1,6 @@
+require 'useragent'
+require 'pry'
+
 module TrafficSpy
   class UserAgent
     attr_reader :id, :agent
@@ -22,8 +25,10 @@ module TrafficSpy
       table.insert(
         :id   => next_id,
         :agent  => attributes[:userAgent],
-        :browser => attributes[:userAgent].to_s.match(/(^[\w.-\/]+) ([\W][\w]+[\W] [\w\d ]+[\W]) ([\w\/.]+) ([\W][\w, ]+[\W]) ([\w\/. ]+$)/)[4],
-        :os => attributes[:userAgent].to_s.match(/(^[\w.-\/]+) ([\W][\w]+[\W] [\w\d ]+[\W]) ([\w\/.]+) ([\W][\w, ]+[\W]) ([\w\/. ]+$)/)[2]
+        # :browser => attributes[:userAgent].to_s.match(/(^[\w.-\/]+) ([\W][\w]+[\W] [\w\d ]+[\W]) ([\w\/.]+) ([\W][\w, ]+[\W]) ([\w\/. ]+$)/)[4],
+        # :os => attributes[:userAgent].to_s.match(/(^[\w.-\/]+) ([\W][\w]+[\W] [\w\d ]+[\W]) ([\w\/.]+) ([\W][\w, ]+[\W]) ([\w\/. ]+$)/)[2]
+        :browser => parse_browser(attributes[:userAgent].to_s),
+        :os => parse_os(attributes[:userAgent].to_s)
         )
     end
 
@@ -37,6 +42,16 @@ module TrafficSpy
     end
 
     def self.parse_browser(agent)
+      user_agent = UserAgent.parse(agent)
+      '#{user_agent.browser} + #{user_agent.browser}'
+    end
+
+    def self.parse_os(agent)
+      os_user_agent = UserAgent.parse(agent)
+      '#{user_agent.platform}'
+    end
+
+    def self.browser(agent)
       DB.fetch(
       "SELECT count(p.user_agent_id), u.browser
       FROM public.user_agents u
@@ -48,7 +63,7 @@ module TrafficSpy
       ).all
     end
 
-    def self.parse_os(agent)
+    def self.os(agent)
       DB.fetch(
       "SELECT count(p.user_agent_id), u.os
       FROM public.user_agents u
