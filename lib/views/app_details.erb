@@ -18,7 +18,16 @@
           </tr>
         </thead>
         <tbody>
-          <%= partial :'partials/url_req', collection: url_reqs %>
+          <% url_reqs.each do |url| %>
+            <tr>
+              <th scope="row">
+                <a href="/sources/<%= identifier %>/urls<%= URI(url[:url]).path %>">
+                  <%= url[:url] %>
+                </a>
+              </th>
+              <td><%= url[:count] %></td>
+            </tr>
+          <% end %>
         </tbody>
       </table>
     </div>

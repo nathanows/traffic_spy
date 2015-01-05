@@ -25,5 +25,10 @@ module TrafficSpy
     def self.find_identifier(identifier)
       table.select(:identifier).where(identifier: identifier).first
     end
+
+    def self.find_object(identifier)
+      row = table.where(identifier: identifier).first
+      Source.new(row) if row
+    end
   end
 end

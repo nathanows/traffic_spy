@@ -14,6 +14,7 @@ end
 #
 # @example
 
+require 'traffic_spy/models/query_helpers'
 require 'traffic_spy/models/urls'
 require 'traffic_spy/models/sources'
 require 'traffic_spy/models/payloads'

@@ -46,6 +46,12 @@ module TrafficSpy
                     avg_response_times: Payload.avg_response_times(identifier)}
     end
 
+    get '/sources/:identifier/urls/*' do
+      erb :url_details,
+        locals: { path: params[:splat],
+                  identifier: params[:identifier],
+                  min_resp_time: QueryHelper.min_response_time(params[:identifier], params[:splat])}
+    end
 
     error 200 do
       JSON.generate(Source.find_identifier(params[:identifier])) if params[:identifier]

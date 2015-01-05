@@ -31,5 +31,10 @@ module TrafficSpy
       row = table.where(url: url).first
       URL.new(row) if row
     end
+
+    def self.find_object(id)
+      row = table.where(id: id).first
+      URL.new(row) if row
+    end
   end
 end
